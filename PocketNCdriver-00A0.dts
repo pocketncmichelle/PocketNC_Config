@@ -1,0 +1,157 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+	/* identification */
+//	part-number = "BB-LCNC-BEBOPRBR";
+	part-number = "PocketNCdriver";
+	version = "00A0";
+
+	/* state the resources this cape uses */
+	exclusive-use =
+		/* the pin header uses */
+		"P8.7",	/* gpio2.2	eStop			*/
+		"P8.8",	/* gpio2.3	X_Min			*/
+		"P8.9",	/* gpio2.5	X_Max/home		*/
+		"P8.10",	/* gpio2.4	Y_Min			*/
+		"P8.11",	/* gpio1.13	X_Dir			*/
+		"P8.12",	/* gpio1.12	X_Step			*/
+		"P8.13",	/* gpio0.23	Spindle pwm		*/
+		"P8.14",	/* gpio0.26	Y_Max			*/
+		"P8.15",	/* gpio1.15	Y_Dir			*/
+		"P8.16",	/* gpio1.14	Y_Step			*/
+		"P8.17",	/* gpio0.27	Z_Min			*/
+		"P8.18",	/* gpio2.01	Z_Max			*/
+		"P8.26",	/* gpio1.29	M.Power			*/
+		"P8.27",	/* gpio2.22	XaEncoder		*/
+		"P8.28",	/* gpio2.24	XbEncoder		*/
+		"P8.29",	/* gpio2.23	YaEncoder		*/
+		"P8.30",	/* gpio2.25	YbEncoder		*/
+		"P8.33",	/* gpio0.09	AbEncoder		*/
+		"P8.34",	/* gpio0.10	A Index			*/
+		"P8.35",	/* gpio0.08	AaEncoder		*/
+		"P8.39",	/* gpio2.12	B Index			*/
+		"P8.41",	/* gpio2.10	BaEncoder		*/
+		"P8.42",	/* gpio2.11	BbEncoder		*/
+		"P8.43",	/* gpio2.08	ZaEncoder		*/
+		"P8.44",	/* gpio2.09	ZbEncoder		*/
+		"P8.45",	/* gpio2.06	X Index			*/
+		"P8.46",	/* gpio2.07	Y Index			*/
+		"P9.11",	/* gpio0.30	Spindle Direction	*/
+		"P9.12",	/* gpio1.28	SpindIe Index		*/
+		"P9.13",	/* gpio0.31	A_Min			*/
+		"P9.14",	/* gpio1.18	PWM2			*/
+		"P9.15",	/* gpio1.16	Z_Step			*/
+		"P9.16",	/* gpio1.19	A_Max/Home		*/
+		"P9.17",	/* gpio0.05	Prog.pause		*/
+		"P9.18",	/* gpio0.04	Prog.stop		*/
+		"P9.21",	/* gpio0.03	Spindle at spd	*/
+		"P9.22",	/* gpio0.02	Prog.run			*/
+		"P9.23",	/* gpio1.17	Z_Dir			*/
+		"P9.24",	/* gpio0.15	Spindle Enable	*/
+		"P9.26",	/* gpio0.14	Z Index			*/
+		"P9.27",	/* gpio3.19	A_Step			*/
+		"P9.28",	/* gpio3.17	A_Dir			*/
+		"P9.29",	/* gpio3.15	A_Step			*/
+		"P9.30",	/* gpio3.16	B_Dir			*/
+		"P9.31",	/* gpio1.28	Spindle Index		*/
+//		"P9.33",	/* AIN4		Therm0			*/
+//		"P9.35",	/* AIN6		Therm2			*/
+//		"P9.36",	/* AIN5		Therm1			*/
+	
+		/* the hardware IP uses */
+/* The following 4 pins conflict with the on-board mmc flash */
+		"gpio2_2",
+		"gpio2_3",
+		"gpio2_5",
+		"gpio2_4",
+		"gpio1_13",
+		"gpio1_12",
+		"gpio0_23",
+		"gpio0_26",
+		"gpio1_15",
+		"gpio1_14",
+		"gpio0_27",
+		"gpio2_1",
+		"gpio0_22",
+		"gpio1_29",
+		"gpio1_18",
+		"gpio1_16",
+		"gpio0_5",
+		"gpio0_4",
+		"gpio0_3",
+		"gpio0_2",
+		"gpio1_17",
+		"gpio0_15",
+		"pru0";
+
+	fragment@0 {
+		target = <&am33xx_pinmux>;
+		__overlay__ {
+
+			foo_pins: foo_pins {
+				pinctrl-single,pins = <
+					0x890 0x3f	/* P8.7	gpio2.2	eStop			*/
+					0x894 0x37	/* P8.8	gpio2.3	X_Min			*/
+					0x89c 0x37	/* P8.9	gpio2.5	X_Max/home		*/
+					0x898 0x37	/* P8.10	gpio2.4	Y_Min			*/
+					0x834 0x37	/* P8.11	gpio1.13	X_Dir			*/
+					0x830 0x37	/* P8.12	gpio1.12	X_Step			*/
+					0x824 0x27	/* P8.13	gpio0.23	Spindle pwm		*/
+					0x828 0x37	/* P8.14	gpio0.26	Y_Max			*/
+					0x83c 0x37	/* P8.15	gpio1.15	Y_Dir			*/
+					0x838 0x37	/* P8.16	gpio1.14	Y_Step			*/
+					0x82c 0x37	/* P8.17	gpio0.27	Z_Min			*/
+					0x88c 0x37	/* P8.18	gpio2.1	Z_Max			*/
+					0x87c 0x37	/* p8.26	gpio1.29	M.Power			*/
+					0x8e0 0x3f	/* p8.27	gpio2.22	XaEncoder		*/
+					0x8e8 0x3f	/* p8.28	gpio2.24	XbEncoder		*/
+					0x8e4 0x3f	/* p8.29	gpio2.23	YaEncoder		*/
+					0x8ec 0x3f	/* p8.30	gpio2.25	YbEncoder		*/
+					0x8d4 0x3f	/* p8.33	gpio0.09	AbEncoder		*/
+					0x8d8 0x3f	/* p8.34	gpio0.10	A_Index			*/
+					0x8d0 0x3f	/* p8.35	gpio0.08	AaEncoder		*/
+					0x8b8 0x3f	/* P8.39	gpio2.12	B_Index			*/
+					0x8b0 0x3f	/* p8.41	gpio2.10	BaEncoder		*/
+					0x8b4 0x3f	/* p8.42	gpio2.11	BbEncoder		*/
+					0x8a8 0x3f	/* p8.43	gpio2.08	ZaEncoder		*/
+					0x8ac 0x3f	/* p8.44	gpio2.09	ZbEncoder		*/
+					0x8a0 0x3f	/* p8.45	gpio2.06	X_Index			*/
+					0x8a4 0x3f	/* p8.46	gpio2.07	Y_Index			*/
+					0x870 0x37	/* P9.11	gpio0.30	Spndle Dir		*/
+					0x878 0x3f	/* P9.12	gpio1.28	Drivers Enable	*/
+					0x874 0x37	/* P9.13	gpio0.31	A_Min			*/
+					0x848 0x37	/* p9.14	gpio1.18	PWM2			*/
+					0x840 0x37	/* p9.15	gpio1.16	Z_Step			*/
+					0x84c 0x37	/* p9.16	gpio1.19	A_Max/Home		*/
+					0x95c 0x3f	/* p9.17	gpio0.5	Prog.pause		*/
+					0x958 0x3f	/* p9.18	gpio0.4	Prog.stop		*/
+					0x954 0x37	/* P9.21	gpio0.3	SpndAtSp		*/
+					0x950 0x3f	/* p9.22	gpio0.2	Prog.run			*/
+					0x844 0x37	/* P9.23	gpio1.17	Z_Dir			*/
+					0x984 0x37	/* P9.24	gpio0.15	Spindle Enable	*/
+					0x980 0x37	/* P9.26	gpio0.14	Z_Index			*/
+					0x9a4 0x37	/* P9.27	gpio3.19	A_Step			*/
+					0x99c 0x37	/* P9.28	gpio3.17	A_Dir			*/
+					0x994 0x37	/* P9.29	gpio3.15	B_Step			*/
+					0x998 0x37	/* P9.30	gpio3.16	B_Dir			*/
+					0x990 0x37	/* P9.31	gpio1.28	SpndIe Index		*/
+				>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&pruss>;
+		__overlay__ {
+			status = "okay";
+
+			pinctrl-names = "default";
+			pinctrl-0 = <&foo_pins>;
+
+		};
+	};
+};
+
